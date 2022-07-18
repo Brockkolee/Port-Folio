@@ -6,39 +6,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return randomX = Math.random() * 6
     }
 
-    function createDiv(z) {
+    function createDiv(divID,noOfDiv) {
 
         var container = document.createElement("div")
-        container.id = (z)
+        container.id = (divID)
         document.getElementById("flex-box").appendChild(container)
 
         for (i = 0; i < calRandom(); i++) {
             var box = document.createElement("div")
             box.className = ("box")
-            box.id = `${z}${i}`
-            container.appendChild(box)
-            function createBox(y) {
-                for (i = 0; i < y; i++) {
+
+            function createBox(noOfBox) {
+                for (i = 0; i < noOfBox; i++) {
                     var innerBox = document.createElement("div")
                     innerBox.className = "inner-box"
                     innerBox.id = (`${box.id}${i}`)
-                    if (innerBox.id == "container100") {
-                        innerBox.textContent = "Hello World"
-                    }
                     box.appendChild(innerBox)
                     innerBox.style.backgroundColor = colors[Math.floor(calRandom())]
                 }
  
             }
 
-            createBox(calRandom())
+            box.id = `${divID}${i}`
+            container.appendChild(box)
+            createBox(noOfDiv)
         }
 
     }
 
-    createDiv("container1");
-    createDiv("container2");
-    createDiv("container3");
+    createDiv("container1",5);
+    createDiv("container2",calRandom());
+    createDiv("container3",calRandom());
+    document.getElementById("container100").textContent = "Hello World"
     innerBoxes = document.querySelectorAll(".inner-box")
     innerBoxes.forEach(element => {
         element.addEventListener("mouseover",(event) => {
