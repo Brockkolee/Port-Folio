@@ -1,4 +1,5 @@
 * {
+    font-family: 'Gochi Hand', cursive; 
     margin: 0;
 }
 
@@ -19,7 +20,6 @@ body {
 .container {
     margin: 0;
     height: 100vh;
-    width: 200vw;
     overflow: scroll;
     scroll-snap-type: y mandatory;
     
@@ -31,6 +31,7 @@ body {
     width: 100vw;
     scroll-snap-align: start;
 }
+
 
 #elegant {
 }
@@ -77,8 +78,31 @@ body {
     white-space:nowrap;
 }
 
+#about {
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+}
 
-h1 {
+.control {
+    flex: 1;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.control > button {
+    height: 10em;
+    width: 10em;
+}
+
+.snakeDiv {
+    flex: 3;
+}
+
+#about h1 {
+    font-size: 2em;
+    margin: 1em;
     text-align: center;
 }
 

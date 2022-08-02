@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    createDiv("container1",calRandom());
-    createDiv("container2",calRandom());
+    createDiv("container1",Math.ceil(calRandom()));
+    createDiv("container2",Math.ceil(calRandom()));
     createDiv("container3",5);
 
     about = document.getElementById("container301")
@@ -58,8 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const squares = document.querySelectorAll('.grid div')
     const score = document.querySelector("#score")
     const text = document.querySelector("#text")
-    foods = document.querySelectorAll('.food')
-
+ 
     // width of the gameboard
     const width = 50
     //starting array of squares that the snake occupies
@@ -79,6 +78,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+
+    window.addEventListener(
+        "keydown",
+        (e) => {
+          if (
+            ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(
+              e.code
+            )
+          ) {
+            e.preventDefault();
+          }
+        },
+        false
+      );
+    
+    function control(e) {
+        e.preventDefault();
+        //if up arrow is press and snake is not moving down
+        if (e.key == "ArrowUp" && direction != width) {
+            direction = -width;
+            //if down arrow is press and snake is not moving up
+        } else if (e.key == "ArrowDown" && direction != -width) {
+            direction = +width;
+            //if left arrow is press and snake is not moving right
+        } else if (e.key == "ArrowLeft" && direction != 1) {
+            direction = -1;
+            //if right arrow is press and snake is not moving left
+        } else if (e.key == "ArrowRight" && direction != -1) {
+            direction = 1;
+        }
+        //prevent snake from moving in opposite direction to so snake will not colide to itself
+    }
+
     function moveSnake() {
 
         if (
@@ -93,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //if snake hits the itself
             squares[snake[0] + direction].classList.contains('snake')
         ) {
-            text.textContent = "Game Over! Click to try again! your final score is "
+            text.textContent = "Game Over! your final score is "
             text.addEventListener('click', () => {
                 location.reload()
             })
@@ -131,22 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    function control(e) {
-        //if up arrow is press and snake is not moving down
-        if (e.key == "ArrowUp" && direction != width) {
-            direction = -width;
-            //if down arrow is press and snake is not moving up
-        } else if (e.key == "ArrowDown" && direction != -width) {
-            direction = +width;
-            //if left arrow is press and snake is not moving right
-        } else if (e.key == "ArrowLeft" && direction != 1) {
-            direction = -1;
-            //if right arrow is press and snake is not moving left
-        } else if (e.key == "ArrowRight" && direction != -1) {
-            direction = 1;
-        }
-        //prevent snake from moving in opposite direction to so snake will not colide to itself
-    }
 
     //set speed of snake
     let moveId = setInterval(moveSnake, speed)
@@ -158,12 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } while (squares[random].classList.contains('snake'));
         //create random food 
         squares[random].classList.add('food')
-        squares[random].style.backgroundColor = colors[calRandom()]
+        squares[random].style.backgroundColor = colors[Math.floor(calRandom())]
 
 
     }
-
-
 
     var message = [1, 51, 101, 151, 201, 102, 103, 3, 53, 153, 203, 5, 6, 7, 56, 106, 156, 206, 205, 207, 210, 259, 12, 62, 112, 162, 212, 13, 64, 114, 15, 16, 66, 116, 166, 216, 18,
         68, 119, 169, 219, 20, 70, 24, 74, 124, 174, 224, 75, 126, 176, 27, 77, 127, 177, 227, 79, 129, 179, 229, 30, 130, 81, 131, 181, 231, 33, 83, 133, 183, 233, 34, 135, 85, 37, 87, 137
